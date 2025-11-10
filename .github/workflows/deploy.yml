@@ -16,7 +16,7 @@ jobs:
       - name: Upload build folder via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ftp://vps114489.serveur-vps.net/::sise-pdzsta.net/
+          server: vps114489.serveur-vps.net/
           username: pdzstaadmin
           password: zrsE49H@
           local-dir: ./PDZSTA_map/
