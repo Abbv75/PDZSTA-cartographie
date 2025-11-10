@@ -68,7 +68,7 @@ const Cartographie = () => {
                     <RapportCartoElement />
 
                     <ShapeFileContainer coucheDeDonneesListe={[{
-                        filePath: COUCHE_DE_DONNEES_LISTE[7].filePath,
+                        filePath: COUCHE_DE_DONNEES_LISTE[6].filePath,
                         opacity: 0.008,
                         couleur_c: green[800],
                     } as SHAPE_OBJECT_T]} />
