@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/PDZSTA_map/static/css/main.73e1e84c.css",
+    "main.js": "/PDZSTA_map/static/js/main.23f1157a.js",
+    "static/js/729.73f7dcbd.chunk.js": "/PDZSTA_map/static/js/729.73f7dcbd.chunk.js",
+    "static/js/453.7d137876.chunk.js": "/PDZSTA_map/static/js/453.7d137876.chunk.js",
+    "static/media/Cameroun.zip": "/PDZSTA_map/static/media/Cameroun.08389eb9c007877dddfc.zip",
+    "static/media/armorieLogo.png": "/PDZSTA_map/static/media/armorieLogo.a923fb97afb8f1c3e03d.png",
+    "static/media/BF.zip": "/PDZSTA_map/static/media/BF.441c658eda4b4fd9a95e.zip",
+    "static/media/logo.png": "/PDZSTA_map/static/media/logo.e5e31bbfeb2eb4bd111d.png",
+    "static/media/bank-mondiale.jpg": "/PDZSTA_map/static/media/bank-mondiale.eeb71a53d6fbd900bdb8.jpg",
+    "static/media/CO01010.zip": "/PDZSTA_map/static/media/CO01010.2c52033cc0a2438bacf7.zip",
+    "static/media/Bandiagara.zip": "/PDZSTA_map/static/media/Bandiagara.215559757dc8ece73674.zip",
+    "static/media/Dioila.zip": "/PDZSTA_map/static/media/Dioila.7ae9f824deb667714006.zip",
+    "static/media/Abidjan.zip": "/PDZSTA_map/static/media/Abidjan.39500e0f3aaf367f1920.zip",
+    "static/media/Bamako.zip": "/PDZSTA_map/static/media/Bamako.ccbcea189a2510953130.zip",
+    "static/media/Mali.zip": "/PDZSTA_map/static/media/Mali.0e13f740b91bc73aaa79.zip",
+    "static/media/toggle.svg": "/PDZSTA_map/static/media/toggle.4cb77f5b444ed35e8e2e.svg",
+    "index.html": "/PDZSTA_map/index.html",
+    "main.73e1e84c.css.map": "/PDZSTA_map/static/css/main.73e1e84c.css.map",
+    "main.23f1157a.js.map": "/PDZSTA_map/static/js/main.23f1157a.js.map",
+    "729.73f7dcbd.chunk.js.map": "/PDZSTA_map/static/js/729.73f7dcbd.chunk.js.map",
+    "453.7d137876.chunk.js.map": "/PDZSTA_map/static/js/453.7d137876.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.73e1e84c.css",
+    "static/js/main.23f1157a.js"
+  ]
+}
