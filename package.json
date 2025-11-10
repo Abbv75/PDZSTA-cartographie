@@ -1,8 +1,8 @@
 {
-  "name": "PSFE-map",
+  "name": "PDZSTA-map",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/PSFE_map",
+  "homepage": "/PDZSTA_map",
   "dependencies": {
     "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.11.4",
@@ -43,7 +43,7 @@
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
     "react-toastify": "^11.0.3",
-    "PSFE-map": "file:",
+    "PDZSTA-map": "file:",
     "shapefile": "^0.6.6",
     "shpjs": "^6.1.0",
     "svgo": "^3.3.2",

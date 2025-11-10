@@ -36,7 +36,7 @@ const Header = () => {
                 color='success'
                 endDecorator={<FontAwesomeIcon icon={faArrowRight} />}
                 onClick={() => {
-                    window.location.href = 'https://PSFE.fidaburkina.org/plan_localites.php'
+                    window.location.href = 'https://PDZSTA.fidaburkina.org/plan_localites.php'
                 }}
             />
 
