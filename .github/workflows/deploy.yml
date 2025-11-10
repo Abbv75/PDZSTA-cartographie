@@ -16,9 +16,9 @@ jobs:
       - name: Upload build folder via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
+          server: vps114489.serveur-vps.net/::sise-pdzsta.net/
+          username: pdzstaadmin
+          password: zrsE49H@
           local-dir: ./PDZSTA_map/
           server-dir: /PDZSTA_map/
           protocol: ftp
