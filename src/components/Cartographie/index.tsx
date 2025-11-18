@@ -37,7 +37,7 @@ const Cartographie = () => {
                 ref={mapRef}
             >
                 <MapContainer
-                    center={LOCATION.cameroun as any}
+                    center={LOCATION.bamako as any}
                     zoom={zoomLevel}
                     scrollWheelZoom={true}
                     style={{
