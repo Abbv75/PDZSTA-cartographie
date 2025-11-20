@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/PDZSTA_maptmp/static/css/main.c71b27f2.css",
-    "main.js": "/PDZSTA_maptmp/static/js/main.bef6a7df.js",
+    "main.js": "/PDZSTA_maptmp/static/js/main.b79afb87.js",
     "static/js/729.73f7dcbd.chunk.js": "/PDZSTA_maptmp/static/js/729.73f7dcbd.chunk.js",
     "static/js/453.7d137876.chunk.js": "/PDZSTA_maptmp/static/js/453.7d137876.chunk.js",
     "static/media/Cameroun.zip": "/PDZSTA_maptmp/static/media/Cameroun.08389eb9c007877dddfc.zip",
@@ -18,12 +18,12 @@
     "static/media/toggle.svg": "/PDZSTA_maptmp/static/media/toggle.4cb77f5b444ed35e8e2e.svg",
     "index.html": "/PDZSTA_maptmp/index.html",
     "main.c71b27f2.css.map": "/PDZSTA_maptmp/static/css/main.c71b27f2.css.map",
-    "main.bef6a7df.js.map": "/PDZSTA_maptmp/static/js/main.bef6a7df.js.map",
+    "main.b79afb87.js.map": "/PDZSTA_maptmp/static/js/main.b79afb87.js.map",
     "729.73f7dcbd.chunk.js.map": "/PDZSTA_maptmp/static/js/729.73f7dcbd.chunk.js.map",
     "453.7d137876.chunk.js.map": "/PDZSTA_maptmp/static/js/453.7d137876.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.c71b27f2.css",
-    "static/js/main.bef6a7df.js"
+    "static/js/main.b79afb87.js"
   ]
 }
