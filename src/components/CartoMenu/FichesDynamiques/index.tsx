@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import { LOADING_STATE_T } from "types";
 import { AppContext } from "providers";
 import getAllFeuille from "functions/API/feuille/getAllFeuille";
-import { ICON } from "constant";
 import ImagePicker from "components/ImagePicker/ImagePicker";
 import { CardMedia } from "@mui/material";
+import classeurToHideInFicheDynamique from "./classeurToHideInFicheDynamique";
 
 const FichesDynamiques = () => {
     const {
@@ -30,10 +30,13 @@ const FichesDynamiques = () => {
             if (!res) return;
 
             const titles = Object.keys(res);
-            setficheTitle(titles);
+
+            const titleFiltered = titles.filter(title => !classeurToHideInFicheDynamique.includes(title));
+
+            setficheTitle(titleFiltered);
 
             // Initialiser les icônes par défaut
-            setficheDynamiquesData(titles.map(title => ({
+            setficheDynamiquesData(titleFiltered.map(title => ({
                 title,
                 icon: iconList[0]
             })));
@@ -71,7 +74,7 @@ const FichesDynamiques = () => {
             const legendContent = (
                 <Stack gap={0.5}>
                     {ficheTitleSelected.map((feuille, idx) => {
-                        const found = ficheDynamiquesData.find((item:any) => item.feuille === feuille);
+                        const found = ficheDynamiquesData.find((item: any) => item.feuille === feuille);
                         return (
                             <Stack key={idx} direction="row" alignItems="center" gap={0.5}>
                                 {found?.icon && (
