@@ -19,7 +19,7 @@ export const urlparams = new URLSearchParams(window.location.search);
 
 const App = () => {
   const [currentMapSelected, setcurrentMapSelected] = useState(FOND_DE_CARTE[0]);
-  const [zoomLevel, setzoomLevel] = useState(7);
+  const [zoomLevel, setzoomLevel] = useState(6);
   const [allRequeteCartoSelected, setallRequeteCartoSelected] = useState([] as { icon?: any, data: GET_ALL_REQUETE_CARTE_T }[]);
   const [ficheTitleSelected, setficheTitleSelected] = useState([] as string[]);
   const [getAllFicheData, setgetAllFicheData] = useState(null as GET_ALL_FEUILLE | null);

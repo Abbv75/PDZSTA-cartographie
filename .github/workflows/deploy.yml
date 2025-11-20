@@ -19,6 +19,6 @@ jobs:
           server: ${{ secrets.FTP_HOST }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local-dir: ./PDZSTA_map/
-          server-dir: /PDZSTA_map/
+          local-dir: ./PDZSTA_maptmp/
+          server-dir: /PDZSTA_maptmp/
           protocol: ftp

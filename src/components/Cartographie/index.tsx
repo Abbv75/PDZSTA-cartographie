@@ -37,13 +37,12 @@ const Cartographie = () => {
                 ref={mapRef}
             >
                 <MapContainer
-                    center={LOCATION.cameroun as any}
+                    center={LOCATION.bamako as any}
                     zoom={zoomLevel}
                     scrollWheelZoom={true}
                     style={{
                         width: "100%",
                         height: "100%",
-                        borderRadius: 5,
                         overflow: "hidden"
                     }}
                 >
@@ -68,8 +67,8 @@ const Cartographie = () => {
                     <RapportCartoElement />
 
                     <ShapeFileContainer coucheDeDonneesListe={[{
-                        filePath: COUCHE_DE_DONNEES_LISTE[7].filePath,
-                        opacity: 0.008,
+                        filePath: COUCHE_DE_DONNEES_LISTE[6].filePath,
+                        opacity: 0.08,
                         couleur_c: green[800],
                     } as SHAPE_OBJECT_T]} />
 
