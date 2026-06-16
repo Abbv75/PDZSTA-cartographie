@@ -1,7 +1,7 @@
 import { MapContainer } from "react-leaflet";
 import { Stack } from "@mui/joy";
 import { useContext } from "react";
-import { AppContext } from "../../providers";
+import { useAppStore } from "store/useAppStore";
 import CurrentVillageElement from "../../features/CurrentVillageElement";
 import CurrentCommuneElement from "../../features/CurrentCommuneElement";
 import CoucheDonneeElement from "../../features/CoucheDonneeElement";
@@ -22,7 +22,7 @@ const Cartographie = () => {
     const {
         mapRef,
         zoomLevel
-    } = useContext(AppContext);
+    } = useAppStore();
 
     return (
         <Stack

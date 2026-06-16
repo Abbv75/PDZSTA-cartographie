@@ -1,11 +1,11 @@
 import { blue } from '@mui/material/colors';
 import ShapeFileContainer from 'components/Cartographie/ShapeFileContainer';
 import { REACT_APP_SHAPE_FILE_URL } from 'constant';
-import { AppContext } from 'providers';
+import { useAppStore } from "store/useAppStore";
 import { useContext } from 'react';
 
 const CommuneShapFiles = () => {
-    const { localite, coucheDeDonneesElementConfig } = useContext(AppContext);
+    const { localite, coucheDeDonneesElementConfig } = useAppStore();
 
     return (
         <ShapeFileContainer

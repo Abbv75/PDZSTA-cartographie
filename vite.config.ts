@@ -22,6 +22,7 @@ export default defineConfig({
       helper: resolve(srcDir, 'helper'),
       workers: resolve(srcDir, 'workers'),
       hooks: resolve(srcDir, 'hooks'),
+      store: resolve(srcDir, 'store'),
     },
   },
   build: {

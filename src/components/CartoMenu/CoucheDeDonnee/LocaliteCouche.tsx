@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Checkbox, LinearProgress, Stack, Typography } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../providers";
+import { useAppStore } from "store/useAppStore";
 import { LOADING_STATE_T, LOCALITE_REGION_T, SHAPE_OBJECT_T } from "types";
 import { useGetAllRegion } from "hooks/useApi";
 
@@ -12,7 +12,7 @@ const LocaliteCouche = () => {
         setlocaliteDepartementsSelected,
         setlocaliteCommunesSelected,
         setlocaliteVillagesSelected
-    } = useContext(AppContext);
+    } = useAppStore();
 
     const { data = [], isLoading } = useGetAllRegion();
 

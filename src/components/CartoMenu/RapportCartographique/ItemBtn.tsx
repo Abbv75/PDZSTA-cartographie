@@ -1,6 +1,6 @@
 import { Button } from '@mui/joy';
 import { green } from '@mui/material/colors';
-import { AppContext } from 'providers';
+import { useAppStore } from "store/useAppStore";
 import { useContext, useEffect, useState } from 'react';
 import { RAPORT_CARTO_T } from 'types';
 
@@ -8,7 +8,7 @@ const ItemBtn = ({ value }: { value: RAPORT_CARTO_T }) => {
     const {
         allRapportCartoSelected,
         setallRapportCartoSelected,
-    } = useContext(AppContext);
+    } = useAppStore();
 
     const [currentColor, setcurrentColor] = useState<string>(green[400]);
 

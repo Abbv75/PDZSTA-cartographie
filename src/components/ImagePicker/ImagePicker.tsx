@@ -4,11 +4,11 @@ import { Avatar, Card, Grid, Stack } from '@mui/joy'
 import { CardMedia, ClickAwayListener, Collapse } from '@mui/material'
 import { green } from '@mui/material/colors'
 import { useContext, useState } from 'react'
-import { AppContext } from 'providers'
+import { useAppStore } from "store/useAppStore";
 import IconItem from './IconItem'
 
 const ImagePicker = ({ onchange }: { onchange?: (value: string) => any }) => {
-    const { setaddImageIsOpen, iconList } = useContext(AppContext);
+    const { setaddImageIsOpen, iconList } = useAppStore();
 
     const [isOpen, setisOpen] = useState(false);
     const [selectedIndex, setselectedIndex] = useState(undefined as number | undefined);

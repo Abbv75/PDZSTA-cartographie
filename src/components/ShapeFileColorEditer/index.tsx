@@ -1,5 +1,5 @@
 import { Button, ButtonGroup, FormControl, FormLabel, Grid, Input, Modal, ModalClose, ModalDialog, Stack, Typography } from '@mui/joy'
-import { AppContext } from 'providers'
+import { useAppStore } from "store/useAppStore";
 import { useContext, useEffect, useState } from 'react'
 
 const ShapeFileColorEditer = () => {
@@ -8,7 +8,7 @@ const ShapeFileColorEditer = () => {
         showShapeFileColorEditer,
         ShapeFileColorEditerSubmitFunction,
         ShapeFileColorEditerDefaultValues
-    } = useContext(AppContext);
+    } = useAppStore();
 
     const [formData, setformData] = useState<{
         borderColor?: string,

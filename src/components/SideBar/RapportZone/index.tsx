@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Option, Select, Stack, Typography } from '@mui/joy';
 import { green } from '@mui/material/colors';
 import { useCallback, useContext, useState } from 'react';
-import { AppContext } from 'providers';
+import { useAppStore } from "store/useAppStore";
 import { LOADING_STATE_T } from 'types';
 
 import { PDFDownloadLink } from '@react-pdf/renderer';
@@ -16,7 +16,7 @@ const RapportZone = () => {
         ficheTitleSelected,
         ficheDynamiquesData,
         getAllFicheData
-    } = useContext(AppContext);
+    } = useAppStore();
 
     const [printLoadingState, setprintLoadingState] = useState<LOADING_STATE_T>(null);
 

@@ -1,9 +1,9 @@
 import { useMapEvents } from "react-leaflet"; // Importer useMapEvents
 import { useContext } from "react"; // Importer useState
-import { AppContext } from "../../../providers";
+import { useAppStore } from "store/useAppStore";
 
 const MapZoomHandler = () => {
-    const { setzoomLevel } = useContext(AppContext);
+    const { setzoomLevel } = useAppStore();
 
     useMapEvents({
         zoomend: (event) => {

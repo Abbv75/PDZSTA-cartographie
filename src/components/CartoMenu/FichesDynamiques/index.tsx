@@ -1,6 +1,6 @@
 import { Accordion, AccordionDetails, AccordionGroup, AccordionSummary, LinearProgress, Radio, Stack } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "providers";
+import { useAppStore } from "store/useAppStore";
 import { useGetAllFeuille } from "hooks/useApi";
 import ImagePicker from "components/ImagePicker/ImagePicker";
 import { CardMedia } from "@mui/material";
@@ -16,7 +16,7 @@ const FichesDynamiques = () => {
         setficheDynamiquesData,
         setlegendeSection,
         iconList
-    } = useContext(AppContext);
+    } = useAppStore();
 
     const [ficheTitle, setficheTitle] = useState([] as string[]);
     const { data: res, isLoading } = useGetAllFeuille();

@@ -1,10 +1,10 @@
 import { CardMedia } from '@mui/material'
 import { IMAGE } from 'constant'
-import { AppContext } from 'providers'
+import { useAppStore } from "store/useAppStore";
 import React, { useContext } from 'react'
 
 const FiliGramZone = () => {
-    const { showFiligram } = useContext(AppContext)
+    const { showFiligram } = useAppStore()
 
     if (!showFiligram) {
         return <React.Fragment />

@@ -6,13 +6,13 @@ import { getProvince } from '../../functions/API';
 import ShapeFileContainer from '../../components/Cartographie/ShapeFileContainer';
 import { PROVINCE_T, SHAPE_OBJECT_T } from 'types';
 import { blue, orange } from '@mui/material/colors';
-import { AppContext } from 'providers';
+import { useAppStore } from "store/useAppStore";
 import { REACT_APP_SHAPE_FILE_URL } from 'constant';
 
 const CurrentProvinceElement = () => {
     const [codeProvince] = useState(urlparams.get('codeDepartement'));
 
-    const { zoomLevel } = useContext(AppContext);
+    const { zoomLevel } = useAppStore();
 
     const [currentProvince, setcurrentProvince] = useState(undefined as PROVINCE_T | undefined);
 
