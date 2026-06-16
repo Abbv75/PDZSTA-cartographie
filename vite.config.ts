@@ -21,6 +21,7 @@ export default defineConfig({
       assets: resolve(srcDir, 'assets'),
       helper: resolve(srcDir, 'helper'),
       workers: resolve(srcDir, 'workers'),
+      hooks: resolve(srcDir, 'hooks'),
     },
   },
   build: {

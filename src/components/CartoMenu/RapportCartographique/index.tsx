@@ -1,8 +1,8 @@
 import { Box, Button, ButtonGroup, Checkbox, LinearProgress, Sheet, Stack, Typography } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { LOADING_STATE_T, RAPORT_CARTO_T } from "types";
+import { useGetAllRapportCarto } from "hooks/useApi";
+import { RAPORT_CARTO_T } from "types";
 import { AppContext } from "providers";
-import { getAllRapportCarto } from "functions/API";
 import { green } from "@mui/material/colors";
 import ItemBtn from "./ItemBtn";
 
@@ -14,39 +14,21 @@ export default () => {
     } = useContext(AppContext);
 
     const [isAllCocher, setisAllCocher] = useState(false);
-    const [data, setdata] = useState<RAPORT_CARTO_T[]>([]);
-    const [loadingState, setloadingState] = useState(null as LOADING_STATE_T);
-
-    const loadData = async () => {
-        try {
-            setloadingState("En cours de chargement");
-            const res = await getAllRapportCarto();
-            if (!res) return;
-
-            setdata(res);
-        } finally {
-            setloadingState(null);
-        }
-    }
+    const { data: res, isLoading } = useGetAllRapportCarto();
+    const rapports = (res || []) as RAPORT_CARTO_T[];
 
     const toutCocherHandle = () => {
-        setallRapportCartoSelected(isAllCocher ? [] : data.map((item) => ({ data: item, color: green[400] })));
+        setallRapportCartoSelected(isAllCocher ? [] : rapports.map((item: any) => ({ data: item, color: green[400] })));
         setisAllCocher(!isAllCocher);
     }
 
     useEffect(
         () => {
-            loadData();
+            if (rapports.length === 0) return;
+            let filtered = rapports.filter((element: any) => allRapportCartoSelected.find(({ data }) => data.code === element.code));
+            setallRapportCartoSelected(filtered.map((item: any) => ({ data: item, color: green[400] })));
         },
-        []
-    );
-
-    useEffect(
-        () => {
-            let res = data.filter((element) => allRapportCartoSelected.find(({ data }) => data.code === element.code));
-            setallRapportCartoSelected(res.map((item) => ({ data: item, color: green[400] })));
-        },
-        [data]
+        [res]
     )
 
     useEffect(() => {
@@ -105,9 +87,9 @@ export default () => {
                 }}
                 variant="soft"
             >
-                {loadingState && (<LinearProgress color="success" />)}
+                {isLoading && (<LinearProgress color="success" />)}
 
-                {data.map((value, index) => (
+                {rapports.map((value: any, index: number) => (
                     <ItemBtn value={value} key={index} />
                 ))}
 

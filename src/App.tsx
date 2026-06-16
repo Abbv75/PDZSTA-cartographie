@@ -10,7 +10,7 @@ import CartoMenu from "./components/CartoMenu"
 import { COMMUNE_T, GET_ALL_FEUILLE, GET_ALL_REQUETE_CARTE_T, PROVINCE_T, RAPORT_CARTO_T, REGION_T, VILLAGE_T } from "types"
 import { AppContext } from "providers"
 import AddIconForm from "features/AddIconForm"
-import getAllIcon from "functions/API/icon/getAllIcon"
+import { useGetAllIcon } from "hooks/useApi"
 import Header from "components/Header"
 import ShapeFileColorEditer from "components/ShapeFileColorEditer"
 import { coucheDeDonneesElementConfig_T } from "types/AppT"
@@ -60,17 +60,18 @@ const App = () => {
     backgroundColor?: string
   } | undefined>(undefined)
 
-  const loadIconList = useCallback(async () => {
-    try {
-      const res = await getAllIcon();
+  const { data: res, refetch } = useGetAllIcon();
 
-      seticonList([...Object.values(ICON), ...res?.map(
-        ({ file }) => `https://PDZSTA.fidaburkina.org/icon_carto/${file}`
-      ) ?? []]);
-    } catch (error) {
-      return;
-    }
-  }, [])
+  useEffect(() => {
+    seticonList([
+      ...Object.values(ICON),
+      ...(res?.map(({ file }: any) => `https://PDZSTA.fidaburkina.org/icon_carto/${file}`) ?? [])
+    ]);
+  }, [res]);
+
+  const loadIconList = useCallback(async () => {
+    await refetch();
+  }, [refetch]);
 
   const localite = useMemo(() => (
     {
@@ -81,9 +82,7 @@ const App = () => {
     }
   ), [localiteRegionsSelected, localiteDepartementsSelected, localiteCommunesSelected, localiteVillagesSelected]);
 
-  useEffect(() => {
-    loadIconList();
-  }, []);
+
 
   const mapRef = useRef<HTMLDivElement>(null);
 
