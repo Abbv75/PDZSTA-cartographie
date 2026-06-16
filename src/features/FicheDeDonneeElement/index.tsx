@@ -2,8 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import ElementContainer from '../../components/Cartographie/ElementContainer';
 import { toast } from 'react-toastify';
 import { GET_REQUETE_CARTE_T } from '../../types';
-import { useAppStore } from "store/useAppStore";
+
 import getRequeteCarte from 'functions/API/requeteCartographique/getRequeteCarte';
+import { useFicheStore } from 'store/useFicheStore';
 
 interface REQUETE_DATA_T {
     title?: string,
@@ -12,7 +13,7 @@ interface REQUETE_DATA_T {
 }
 
 const FicheDeDonneeElement = () => {
-    const { allRequeteCartoSelected } = useAppStore();
+    const { allRequeteCartoSelected } = useFicheStore();
     const [requetesData, setrequetesData] = useState([] as REQUETE_DATA_T[]);
 
     const loadListe = async () => {
