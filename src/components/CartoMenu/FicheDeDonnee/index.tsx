@@ -43,7 +43,7 @@ const FicheDeDonnee = () => {
         }
         else {
             setallRequeteCartoSelected(
-                (prev: typeof COUCHE_DE_DONNEES_LISTE) => [...prev, element]
+                (prev) => [...prev, element]
             );
         }
     }

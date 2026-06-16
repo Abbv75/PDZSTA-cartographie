@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import React from 'react';
 import { COMMUNE_T, GET_ALL_FEUILLE, GET_ALL_REQUETE_CARTE_T, PROVINCE_T, RAPORT_CARTO_T, REGION_T, SHAPE_OBJECT_T, VILLAGE_T } from 'types';
-import { FOND_DE_CARTE, ICON, COUCHE_DE_DONNEES_LISTE } from 'constant';
+import { FOND_DE_CARTE, ICON, COUCHE_DE_DONNEES_LISTE, CARTO_MENU_EN_TETE_ZONE } from 'constant';
 import { coucheDeDonneesElementConfig_T } from 'types/AppT';
 
 type SetStateAction<T> = T | ((prevState: T) => T);
@@ -84,6 +84,12 @@ interface AppState {
 
     coucheDeDonneesElementConfig: coucheDeDonneesElementConfig_T;
     setcoucheDeDonneesElementConfig: (val: SetStateAction<coucheDeDonneesElementConfig_T>) => void;
+
+    currentMenu: typeof CARTO_MENU_EN_TETE_ZONE[0];
+    setcurrentMenu: (val: SetStateAction<typeof CARTO_MENU_EN_TETE_ZONE[0]>) => void;
+
+    cartoMenuIsOpen: boolean;
+    setcartoMenuIsOpen: (val: SetStateAction<boolean>) => void;
 }
 
 const createSetter = <T,>(set: any, key: string) => (val: SetStateAction<T>) => {
@@ -160,6 +166,12 @@ const useZustandStore = create<AppState>((set) => ({
         showShapefilePopup: false
     },
     setcoucheDeDonneesElementConfig: createSetter(set, 'coucheDeDonneesElementConfig'),
+
+    currentMenu: CARTO_MENU_EN_TETE_ZONE[0],
+    setcurrentMenu: createSetter(set, 'currentMenu'),
+
+    cartoMenuIsOpen: false,
+    setcartoMenuIsOpen: createSetter(set, 'cartoMenuIsOpen'),
 }));
 
 export const useAppStore = () => {

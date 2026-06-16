@@ -1,10 +1,9 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Stack } from '@mui/joy'
 import { CARTO_MENU_EN_TETE_ZONE } from 'constant'
-import { useContext } from 'react'
-import { CartoMenuContext } from '../../providers'
 import { grey } from '@mui/material/colors'
 import { Collapse } from '@mui/material'
+import { useAppStore } from 'store/useAppStore'
 
 const EnteteZone = () => {
     const {
@@ -12,7 +11,7 @@ const EnteteZone = () => {
         currentMenu,
         setcartoMenuIsOpen,
         cartoMenuIsOpen
-    } = useContext(CartoMenuContext);
+    } = useAppStore();
 
     return (
         <Stack
