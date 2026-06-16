@@ -2,14 +2,15 @@ import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Button, Modal, ModalClose, ModalDialog, Stack, Typography } from '@mui/joy'
 import createIcon from 'functions/API/icon/createIcon'
-import { useAppStore } from "store/useAppStore";
+
 import { useContext, useState } from 'react'
 import { toast } from 'react-toastify'
+import { useUIStore } from 'store/useUIStore';
 
 type USE_STATE_T = React.Dispatch<React.SetStateAction<boolean>>
 
 const AddIconForm = ({ isOpen = true, setIsOpen }: { isOpen: boolean, setIsOpen: USE_STATE_T }) => {
-    const { loadIconList } = useAppStore();
+    const { loadIconList } = useUIStore();
 
     const [files, setFiles] = useState<FileList | null>(null)
     const [loading, setLoading] = useState(false);

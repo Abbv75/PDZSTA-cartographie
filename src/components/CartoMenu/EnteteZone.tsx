@@ -3,15 +3,11 @@ import { Button, Stack } from '@mui/joy'
 import { CARTO_MENU_EN_TETE_ZONE } from 'constant'
 import { grey } from '@mui/material/colors'
 import { Collapse } from '@mui/material'
-import { useAppStore } from 'store/useAppStore'
+import { useMenuStore } from 'store/useMenuStore';
+
 
 const EnteteZone = () => {
-    const {
-        setcurrentMenu,
-        currentMenu,
-        setcartoMenuIsOpen,
-        cartoMenuIsOpen
-    } = useAppStore();
+    const { setcurrentMenu, currentMenu, setcartoMenuIsOpen, cartoMenuIsOpen } = useMenuStore();
 
     return (
         <Stack

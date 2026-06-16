@@ -1,10 +1,11 @@
 import { Accordion, AccordionDetails, AccordionGroup, AccordionSummary, Card, Stack, Tooltip, Typography } from '@mui/joy';
 import { green } from '@mui/material/colors';
-import { useAppStore } from "store/useAppStore";
+
 import { useState, useCallback, useRef, useContext } from 'react';
+import { useLegendStore } from 'store/useLegendStore';
 
 const LegendeZone = () => {
-    const { legendeSection } = useAppStore();
+    const { legendeSection } = useLegendStore();
 
     const [isDragging, setIsDragging] = useState(false);
     const [position, setPosition] = useState({ x: 60, y: 10 });

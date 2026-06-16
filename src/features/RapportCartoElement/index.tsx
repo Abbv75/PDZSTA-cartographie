@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import ElementContainer from '../../components/Cartographie/ElementContainer';
 import { toast } from 'react-toastify';
 import { GET_RAPORT_CARTO_T } from '../../types';
-import { useAppStore } from "store/useAppStore";
+
 import { getRapportCarto } from 'functions/API';
 import { green } from '@mui/material/colors';
+import { useFicheStore } from 'store/useFicheStore';
 
 export default () => {
-    const { allRapportCartoSelected } = useAppStore();
+    const { allRapportCartoSelected } = useFicheStore();
     const [requetesData, setrequetesData] = useState([] as { data: GET_RAPORT_CARTO_T, color?: string }[]);
 
     const loadListe = async () => {

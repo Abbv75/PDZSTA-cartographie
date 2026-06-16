@@ -9,10 +9,11 @@ import CoucheDeDonnee from './CoucheDeDonnee'
 import FicheDeDonnee from './FicheDeDonnee'
 import FichesDynamiques from './FichesDynamiques'
 import RapportCartographique from './RapportCartographique'
-import { useAppStore } from 'store/useAppStore'
+import { useMenuStore } from 'store/useMenuStore';
+
 
 const CartoMenu = () => {
-    const { currentMenu, cartoMenuIsOpen, setcartoMenuIsOpen } = useAppStore();
+    const { currentMenu, cartoMenuIsOpen, setcartoMenuIsOpen } = useMenuStore();
     const [pane, setpane] = useState(<>Le composant par defaut</>);
 
     useEffect(

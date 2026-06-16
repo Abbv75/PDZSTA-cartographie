@@ -1,9 +1,10 @@
 import ShapeFileContainer from 'components/Cartographie/ShapeFileContainer';
-import { useAppStore } from "store/useAppStore";
+
 import { useContext } from 'react';
+import { useDataLayerStore } from 'store/useDataLayerStore';
 
 const CoucheDonneeElement = () => {
-    const { coucheDeDonneesSelectedListe, coucheDeDonneesElementConfig } = useAppStore();
+    const { coucheDeDonneesSelectedListe, coucheDeDonneesElementConfig } = useDataLayerStore();
 
     return (
         <ShapeFileContainer

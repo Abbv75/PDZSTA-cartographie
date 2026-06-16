@@ -1,22 +1,18 @@
 import { Accordion, AccordionDetails, AccordionGroup, AccordionSummary, LinearProgress, Radio, Stack } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { useAppStore } from "store/useAppStore";
+
 import { useGetAllFeuille } from "hooks/useApi";
 import ImagePicker from "components/ImagePicker/ImagePicker";
 import { CardMedia } from "@mui/material";
 import classeurToHideInFicheDynamique from "./classeurToHideInFicheDynamique";
+import { useFicheStore } from 'store/useFicheStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useUIStore } from 'store/useUIStore';
 
 const FichesDynamiques = () => {
-    const {
-        ficheTitleSelected,
-        setficheTitleSelected,
-        getAllFicheData,
-        setgetAllFicheData,
-        ficheDynamiquesData,
-        setficheDynamiquesData,
-        setlegendeSection,
-        iconList
-    } = useAppStore();
+    const { ficheTitleSelected, setficheTitleSelected, getAllFicheData, setgetAllFicheData, ficheDynamiquesData, setficheDynamiquesData } = useFicheStore();
+    const { setlegendeSection } = useLegendStore();
+    const { iconList } = useUIStore();
 
     const [ficheTitle, setficheTitle] = useState([] as string[]);
     const { data: res, isLoading } = useGetAllFeuille();

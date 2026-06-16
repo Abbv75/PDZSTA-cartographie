@@ -3,11 +3,12 @@ import { grey } from '@mui/material/colors'
 import { FOND_DE_CARTE } from 'constant'
 import { Fragment } from 'react/jsx-runtime'
 import { useContext, useState } from 'react'
-import { useAppStore } from "store/useAppStore";
+import { useMapStore } from 'store/useMapStore';
+
 
 const FondDeCarteZone = () => {
     const [currentIndex, setcurrentIndex] = useState(0);
-    const { setcurrentMapSelected } = useAppStore();
+    const { setcurrentMapSelected } = useMapStore();
 
     return (
         <Stack

@@ -2,16 +2,15 @@ import { Box, Button, ButtonGroup, Checkbox, LinearProgress, Sheet, Stack, Typog
 import { useContext, useEffect, useState } from "react";
 import { useGetAllRapportCarto } from "hooks/useApi";
 import { RAPORT_CARTO_T } from "types";
-import { useAppStore } from "store/useAppStore";
+
 import { green } from "@mui/material/colors";
 import ItemBtn from "./ItemBtn";
+import { useFicheStore } from 'store/useFicheStore';
+import { useLegendStore } from 'store/useLegendStore';
 
 export default () => {
-    const {
-        allRapportCartoSelected,
-        setallRapportCartoSelected,
-        setlegendeSection,
-    } = useAppStore();
+    const { allRapportCartoSelected, setallRapportCartoSelected } = useFicheStore();
+    const { setlegendeSection } = useLegendStore();
 
     const [isAllCocher, setisAllCocher] = useState(false);
     const { data: res, isLoading } = useGetAllRapportCarto();

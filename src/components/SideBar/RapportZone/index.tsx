@@ -3,20 +3,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Option, Select, Stack, Typography } from '@mui/joy';
 import { green } from '@mui/material/colors';
 import { useCallback, useContext, useState } from 'react';
-import { useAppStore } from "store/useAppStore";
+
 import { LOADING_STATE_T } from 'types';
 
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import RapportDocument from './RapportDocument'; // Le composant PDF que tu dois créer
+import { useDataLayerStore } from 'store/useDataLayerStore';
+import { useFicheStore } from 'store/useFicheStore';
 
 const RapportZone = () => {
-    const {
-        coucheDeDonneesSelectedListe,
-        allRequeteCartoSelected,
-        ficheTitleSelected,
-        ficheDynamiquesData,
-        getAllFicheData
-    } = useAppStore();
+    const { coucheDeDonneesSelectedListe } = useDataLayerStore();
+    const { allRequeteCartoSelected, ficheTitleSelected, ficheDynamiquesData, getAllFicheData } = useFicheStore();
 
     const [printLoadingState, setprintLoadingState] = useState<LOADING_STATE_T>(null);
 

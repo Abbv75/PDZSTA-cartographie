@@ -2,18 +2,18 @@ import { Button, ButtonGroup, Checkbox, LinearProgress, Sheet, Stack } from "@mu
 import { useContext, useEffect, useMemo, useState } from "react";
 import { COUCHE_DE_DONNEES_LISTE, ICON } from "constant";
 import { useGetAllRequeteCarte } from "hooks/useApi";
-import { useAppStore } from "store/useAppStore";
+
 import ImagePicker from "components/ImagePicker/ImagePicker";
 
 import { GET_ALL_REQUETE_CARTE_T } from "types";
+import { useFicheStore } from 'store/useFicheStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useUIStore } from 'store/useUIStore';
 
 const FicheDeDonnee = () => {
-    const {
-        allRequeteCartoSelected,
-        setallRequeteCartoSelected,
-        setlegendeSection,
-        iconList,
-    } = useAppStore();
+    const { allRequeteCartoSelected, setallRequeteCartoSelected } = useFicheStore();
+    const { setlegendeSection } = useLegendStore();
+    const { iconList } = useUIStore();
 
     const [isAllCocher, setisAllCocher] = useState(false);
     const [data, setdata] = useState([] as { icon?: any, data: GET_ALL_REQUETE_CARTE_T }[]);

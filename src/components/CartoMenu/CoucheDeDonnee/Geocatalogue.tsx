@@ -1,19 +1,17 @@
 import { Box, Button, ButtonGroup, Checkbox, LinearProgress, Sheet, Stack } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { useAppStore } from "store/useAppStore";
+
 import { useGetCoucheDonnee } from "hooks/useApi";
 import { COUCHE_DE_DONNEE_T, SHAPE_OBJECT_T } from "types";
 import { REACT_APP_SHAPE_FILE_URL } from "constant";
+import { useDataLayerStore } from 'store/useDataLayerStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useUIStore } from 'store/useUIStore';
 
 const Geocatalogue = () => {
-    const {
-        coucheDeDonneesSelectedListe,
-        setcoucheDeDonneesSelectedListe,
-        setlegendeSection,
-        setshowShapeFileColorEditer,
-        setShapeFileColorEditerDefaultValues,
-        setShapeFileColorEditerSubmitFunction
-    } = useAppStore();
+    const { coucheDeDonneesSelectedListe, setcoucheDeDonneesSelectedListe } = useDataLayerStore();
+    const { setlegendeSection } = useLegendStore();
+    const { setshowShapeFileColorEditer, setShapeFileColorEditerDefaultValues, setShapeFileColorEditerSubmitFunction } = useUIStore();
 
     const [coucheDonneIsAllCocher, setcoucheDonneIsAllCocher] = useState<boolean>(false);
     const [data, setdata] = useState<COUCHE_DE_DONNEE_T[]>([]);
