@@ -4,7 +4,6 @@
   "private": true,
   "homepage": "/PDZSTA_maptmp",
   "dependencies": {
-    "@craco/craco": "^7.1.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@fontsource/roboto": "^5.0.13",
@@ -15,6 +14,7 @@
     "@mui/joy": "^5.0.0-beta.36",
     "@mui/material": "^5.15.17",
     "@react-pdf/renderer": "^4.3.0",
+    "@tanstack/react-query": "^5.101.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -41,21 +41,20 @@
     "react-qr-code": "^2.0.15",
     "react-rnd": "^10.5.2",
     "react-router-dom": "^6.23.0",
-    "react-scripts": "5.0.1",
     "react-toastify": "^11.0.3",
-    "PDZSTA-map": "file:",
     "shapefile": "^0.6.6",
     "shpjs": "^6.1.0",
     "svgo": "^3.3.2",
     "swiper": "^11.1.14",
     "typescript": "^4.9.5",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zustand": "^5.0.14"
   },
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "eject": "react-scripts eject"
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": [
@@ -82,7 +81,10 @@
     "@types/react-helmet": "^6.1.11",
     "@types/react-rnd": "^7.4.4",
     "@types/shpjs": "^3.4.7",
-    "react-helmet": "^6.1.0"
+    "@vitejs/plugin-react": "^4.3.1",
+    "react-helmet": "^6.1.0",
+    "vite": "^5.4.0",
+    "vite-tsconfig-paths": "^6.1.1"
   },
   "overrides": {
     "nth-check": "^2.1.1",

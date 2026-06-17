@@ -3,15 +3,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Stack, Typography } from '@mui/joy';
 import { green } from '@mui/material/colors';
 import { useCallback, useContext, useState } from 'react';
-import { AppContext } from 'providers';
+
 import domtoimage from 'dom-to-image-more';
 import { saveAs } from 'file-saver';
 import { LOADING_STATE_T } from 'types';
 import { toast } from 'react-toastify';
 import ImageEditor from './ImageEditor';
+import { useMapStore } from 'store/useMapStore';
+import { useUIStore } from 'store/useUIStore';
 
 const CaptureZone = () => {
-    const { mapRef, setshowFiligram } = useContext(AppContext);
+    const { mapRef } = useMapStore();
+    const { setshowFiligram } = useUIStore();
     const [printLoadingState, setprintLoadingState] = useState(null as LOADING_STATE_T);
     const [capturedImage, setCapturedImage] = useState(null);
     const [showEditor, setShowEditor] = useState(false);

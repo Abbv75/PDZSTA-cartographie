@@ -1,8 +1,9 @@
 import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import { GET_REQUETE_CARTE_T } from '../../types';
-import { AppContext } from 'providers';
+
 import ElementContainer from 'components/Cartographie/ElementContainer';
+import { useFicheStore } from 'store/useFicheStore';
 
 interface REQUETE_DATA_T {
     title?: string,
@@ -11,7 +12,7 @@ interface REQUETE_DATA_T {
 }
 
 const FichesDynamiquesElement = () => {
-    const { ficheTitleSelected, getAllFicheData, ficheDynamiquesData } = useContext(AppContext);
+    const { ficheTitleSelected, getAllFicheData, ficheDynamiquesData } = useFicheStore();
     const [elementListe, setelementListe] = useState([] as REQUETE_DATA_T[]);
 
     const restructureData = useMemo(() => {

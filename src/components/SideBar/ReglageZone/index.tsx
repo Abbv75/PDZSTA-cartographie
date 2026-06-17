@@ -1,13 +1,11 @@
 import { Stack, Typography } from '@mui/joy';
 import { memo, useContext } from 'react';
-import { AppContext } from 'providers';
+
 import { Sheet, Switch } from "@mui/joy";
+import { useDataLayerStore } from 'store/useDataLayerStore';
 
 export default memo(() => {
-    const {
-        coucheDeDonneesElementConfig,
-        setcoucheDeDonneesElementConfig
-    } = useContext(AppContext);
+    const { coucheDeDonneesElementConfig, setcoucheDeDonneesElementConfig } = useDataLayerStore();
 
     return (
         <Stack

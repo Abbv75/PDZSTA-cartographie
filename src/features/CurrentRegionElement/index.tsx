@@ -6,13 +6,14 @@ import { getRegion } from '../../functions/API';
 import ShapeFileContainer from '../../components/Cartographie/ShapeFileContainer';
 import { REGION_T, SHAPE_OBJECT_T } from 'types';
 import { blue, orange, red } from '@mui/material/colors';
-import { AppContext } from 'providers';
+
 import { REACT_APP_SHAPE_FILE_URL } from 'constant';
+import { useMapStore } from 'store/useMapStore';
 
 const CurrentRegionElement = () => {
     const [codeRegion] = useState(urlparams.get('codeRegion'));
 
-    const { zoomLevel } = useContext(AppContext);
+    const { zoomLevel } = useMapStore();
 
     const [currentRegion, setcurrentRegion] = useState(undefined as REGION_T | undefined);
 

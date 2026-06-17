@@ -2,7 +2,6 @@ import { Stack } from '@mui/joy'
 import EnteteZone from './EnteteZone'
 import { Collapse } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { CartoMenuContext } from '../../providers'
 import { CARTO_MENU_EN_TETE_ZONE } from 'constant'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowAltCircleDown } from '@fortawesome/free-solid-svg-icons'
@@ -10,10 +9,11 @@ import CoucheDeDonnee from './CoucheDeDonnee'
 import FicheDeDonnee from './FicheDeDonnee'
 import FichesDynamiques from './FichesDynamiques'
 import RapportCartographique from './RapportCartographique'
+import { useMenuStore } from 'store/useMenuStore';
+
 
 const CartoMenu = () => {
-    const [currentMenu, setcurrentMenu] = useState(CARTO_MENU_EN_TETE_ZONE[0]);
-    const [cartoMenuIsOpen, setcartoMenuIsOpen] = useState(false);
+    const { currentMenu, cartoMenuIsOpen, setcartoMenuIsOpen } = useMenuStore();
     const [pane, setpane] = useState(<>Le composant par defaut</>);
 
     useEffect(
@@ -38,15 +38,7 @@ const CartoMenu = () => {
     )
 
     return (
-        <CartoMenuContext.Provider
-            value={{
-                currentMenu: currentMenu,
-                setcurrentMenu: setcurrentMenu,
-                setcartoMenuIsOpen: setcartoMenuIsOpen,
-                cartoMenuIsOpen: cartoMenuIsOpen
-            }}
-        >
-            <Stack
+        <Stack
                 position={"fixed"}
                 bottom={10}
                 left={10}
@@ -90,7 +82,6 @@ const CartoMenu = () => {
                     </Stack>
                 </Collapse>
             </Stack>
-        </CartoMenuContext.Provider>
     )
 }
 

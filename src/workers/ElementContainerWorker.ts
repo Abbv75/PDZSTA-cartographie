@@ -1,33 +1,33 @@
 /* eslint-env worker */
 
-interface ElementData {
-    latitude: string | number;
-    longitude: string | number;
-    [key: string]: any;
+export interface ElementData {
+    latitude?: string | number;
+    longitude?: string | number;
+    [key: string]: unknown;
 }
 
-interface FieldKey {
+export interface FieldKey {
     originaleName: string;
     renamed?: string;
 }
 
-interface WorkerInputData {
+export interface WorkerInputData {
     data: ElementData[];
     fieldKeyListe: FieldKey[] | '*';
 }
 
-interface PopUpDataItem {
+export interface PopUpDataItem {
     label: string;
-    value: any;
+    value: unknown;
 }
 
-interface ProcessedPoint {
+export interface ProcessedPoint {
     coor: [number, number];
     popUpData: PopUpDataItem[];
 }
 
 // Use globalThis instead of self to avoid ESLint no-restricted-globals
-(globalThis as any).onmessage = function (event: MessageEvent<WorkerInputData>) {
+(globalThis as unknown as Worker).onmessage = function (event: MessageEvent<WorkerInputData>) {
     const { data, fieldKeyListe } = event.data;
     const processedPoints: ProcessedPoint[] = [];
     const chunkSize = 20;
@@ -82,7 +82,7 @@ interface ProcessedPoint {
         // Envoyer les points par paquet pour un affichage progressif
         if (processedPoints.length > 0 && ((index + 1) % chunkSize === 0 || (index + 1) === data.length)) {
             console.log(`Worker: envoie de paquet de ${processedPoints.length} points.`);
-            (globalThis as any).postMessage(structuredClone(processedPoints));
+            (globalThis as unknown as Worker).postMessage(structuredClone(processedPoints));
             processedPoints.length = 0;
         }
     });
@@ -90,7 +90,7 @@ interface ProcessedPoint {
     // Envoyer le dernier paquet s'il reste des points
     if (processedPoints.length > 0) {
         console.log(`Worker: a envoyer ses derniers paquet de ${processedPoints.length} points.`);
-        (globalThis as any).postMessage(structuredClone(processedPoints));
+        (globalThis as unknown as Worker).postMessage(structuredClone(processedPoints));
     }
 
     console.log('Worker: ElementContainerWorker.ts a finit tout ses traitements.');

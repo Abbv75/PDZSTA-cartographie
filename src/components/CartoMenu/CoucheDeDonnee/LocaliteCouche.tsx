@@ -1,36 +1,18 @@
 import { Accordion, AccordionDetails, AccordionSummary, Box, Checkbox, LinearProgress, Stack, Typography } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../providers";
+
 import { LOADING_STATE_T, LOCALITE_REGION_T, SHAPE_OBJECT_T } from "types";
-import { getAllRegion } from "functions/API/region/getAll";
+import { useGetAllRegion } from "hooks/useApi";
+import { useDataLayerStore } from 'store/useDataLayerStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useLocaliteStore } from 'store/useLocaliteStore';
 
 const LocaliteCouche = () => {
-    const {
-        coucheDeDonneesSelectedListe,
-        setlegendeSection,
-        setlocaliteRegionsSelected,
-        setlocaliteDepartementsSelected,
-        setlocaliteCommunesSelected,
-        setlocaliteVillagesSelected
-    } = useContext(AppContext);
+    const { coucheDeDonneesSelectedListe } = useDataLayerStore();
+    const { setlegendeSection } = useLegendStore();
+    const { setlocaliteRegionsSelected, setlocaliteDepartementsSelected, setlocaliteCommunesSelected, setlocaliteVillagesSelected } = useLocaliteStore();
 
-    const [data, setdata] = useState<LOCALITE_REGION_T[]>([]);
-    const [loadingState, setloadingState] = useState<LOADING_STATE_T>(null);
-
-    /** Charger les couches depuis l'API */
-    const loadData = async () => {
-        try {
-            setloadingState("En cours de chargement");
-            const res = await getAllRegion();
-            if (res) {
-                setdata(res);
-            }
-        } catch (error) {
-            console.error("Erreur lors du chargement des couches", error);
-        } finally {
-            setloadingState(null);
-        }
-    };
+    const { data = [], isLoading } = useGetAllRegion();
 
     /** Toggle (activer/désactiver) une couche */
     const toogleElementInCoucheDonnesListe = (element: any, type: 'region' | 'departement' | 'commune' | 'village') => {
@@ -85,12 +67,7 @@ const LocaliteCouche = () => {
     };
 
 
-    /** Charger au montage */
-    useEffect(() => {
-        loadData();
-    }, []);
-
-    if (loadingState) {
+    if (isLoading) {
         return (
             <LinearProgress />
         )
@@ -98,7 +75,7 @@ const LocaliteCouche = () => {
 
     return (
         <Stack gap={1} >
-            {data.map((region, index) => (
+            {(data ? (data as LOCALITE_REGION_T[]) : []).map((region: any, index: number) => (
                 <Accordion
                     key={index}
                     sx={{ fontSize: 12, borderRadius: 5, p: 1 }}
@@ -114,7 +91,7 @@ const LocaliteCouche = () => {
                     />
 
                     <AccordionDetails>
-                        {region.departements.map((departement, index) => (
+                        {region.departements.map((departement: any, index: number) => (
                             <Accordion
                                 key={index}
                                 sx={{ ml: 1.5, pl: 1.5, borderLeft: `1px solid grey` }}
@@ -129,7 +106,7 @@ const LocaliteCouche = () => {
                                 />
 
                                 <AccordionDetails >
-                                    {departement.communes.map((commune, index) => (
+                                    {departement.communes.map((commune: any, index: number) => (
                                         <Accordion
                                             key={index}
                                             sx={{ ml: 1.5, pl: 1.5, borderLeft: `1px solid grey` }}
@@ -149,7 +126,7 @@ const LocaliteCouche = () => {
                                                     sx={{ ml: 1.5, pl: 1.5, borderLeft: `1px solid grey` }}
                                                     gap={1}
                                                 >
-                                                    {commune.villages.map((village, index) => (
+                                                    {commune.villages.map((village: any, index: number) => (
                                                         <Checkbox
                                                             label={village.nom_village.toLowerCase()}
                                                             onClick={() => toogleElementInCoucheDonnesListe(village, 'village')}

@@ -1,35 +1,35 @@
 export const COUCHE_DE_DONNEES_LISTE = [
     {
         name: "Abidjan",
-        filePath: require("../assets/leaflet.shapefile/Abidjan.zip"),
-        // imageUrl: require("../assets/images/region/bamako.png")
+        filePath: new URL("../assets/leaflet.shapefile/Abidjan.zip", import.meta.url).href,
+        // imageUrl: new URL("../assets/images/region/bamako.png", import.meta.url).href
     },
     {
         name: "Bamako",
-        filePath: require("../assets/leaflet.shapefile/Bamako.zip"),
+        filePath: new URL("../assets/leaflet.shapefile/Bamako.zip", import.meta.url).href,
     },
     {
         name: "Bandiagara",
-        filePath: require("../assets/leaflet.shapefile/Bandiagara.zip"),
+        filePath: new URL("../assets/leaflet.shapefile/Bandiagara.zip", import.meta.url).href,
     },
     {
         name: "Dioila",
-        filePath: require("../assets/leaflet.shapefile/Dioila.zip"),
+        filePath: new URL("../assets/leaflet.shapefile/Dioila.zip", import.meta.url).href,
     },
     {
         name: '',
-        filePath: require('../assets/leaflet.shapefile/CO01010.zip')
+        filePath: new URL('../assets/leaflet.shapefile/CO01010.zip', import.meta.url).href
     },
     {
         name: 'Burkina Faso',
-        filePath: require('../assets/leaflet.shapefile/BF.zip')
+        filePath: new URL('../assets/leaflet.shapefile/BF.zip', import.meta.url).href
     },
     {
         name: 'Mali',
-        filePath: require('../assets/leaflet.shapefile/Mali.zip')
+        filePath: new URL('../assets/leaflet.shapefile/Mali.zip', import.meta.url).href
     },
     {
         name: 'Cameroun',
-        filePath: require('../assets/leaflet.shapefile/Cameroun.zip')
+        filePath: new URL('../assets/leaflet.shapefile/Cameroun.zip', import.meta.url).href
     },
 ];

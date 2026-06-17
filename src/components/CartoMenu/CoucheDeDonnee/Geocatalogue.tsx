@@ -1,38 +1,27 @@
 import { Box, Button, ButtonGroup, Checkbox, LinearProgress, Sheet, Stack } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { AppContext } from "../../../providers";
-import { COUCHE_DE_DONNEE_T, LOADING_STATE_T, SHAPE_OBJECT_T } from "types";
-import { getCoucheDonnee } from "functions/API";
+
+import { useGetCoucheDonnee } from "hooks/useApi";
+import { COUCHE_DE_DONNEE_T, SHAPE_OBJECT_T } from "types";
 import { REACT_APP_SHAPE_FILE_URL } from "constant";
+import { useDataLayerStore } from 'store/useDataLayerStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useUIStore } from 'store/useUIStore';
 
 const Geocatalogue = () => {
-    const {
-        coucheDeDonneesSelectedListe,
-        setcoucheDeDonneesSelectedListe,
-        setlegendeSection,
-        setshowShapeFileColorEditer,
-        setShapeFileColorEditerDefaultValues,
-        setShapeFileColorEditerSubmitFunction
-    } = useContext(AppContext);
+    const { coucheDeDonneesSelectedListe, setcoucheDeDonneesSelectedListe } = useDataLayerStore();
+    const { setlegendeSection } = useLegendStore();
+    const { setshowShapeFileColorEditer, setShapeFileColorEditerDefaultValues, setShapeFileColorEditerSubmitFunction } = useUIStore();
 
     const [coucheDonneIsAllCocher, setcoucheDonneIsAllCocher] = useState<boolean>(false);
     const [data, setdata] = useState<COUCHE_DE_DONNEE_T[]>([]);
-    const [loadingState, setloadingState] = useState<LOADING_STATE_T>(null);
+    const { data: res, isLoading } = useGetCoucheDonnee();
 
-    /** Charger les couches depuis l'API */
-    const loadData = async () => {
-        try {
-            setloadingState("En cours de chargement");
-            const res = await getCoucheDonnee();
-            if (res) {
-                setdata(res);
-            }
-        } catch (error) {
-            console.error("Erreur lors du chargement des couches", error);
-        } finally {
-            setloadingState(null);
+    useEffect(() => {
+        if (res && data.length === 0) {
+            setdata(res);
         }
-    };
+    }, [res]);
 
     /** Toggle (activer/désactiver) une couche */
     const toogleElementInCoucheDonnesListe = (element: SHAPE_OBJECT_T) => {
@@ -144,11 +133,7 @@ const Geocatalogue = () => {
 
 
 
-    useEffect(() => {
-        loadData();
-    }, []);
-
-    if (loadingState) {
+    if (isLoading) {
         return (
             <LinearProgress />
         )

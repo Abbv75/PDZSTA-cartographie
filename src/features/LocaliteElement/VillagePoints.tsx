@@ -1,10 +1,10 @@
 import ElementContainer from 'components/Cartographie/ElementContainer';
 import { ICON } from 'constant';
-import { AppContext } from 'providers';
-import { useContext } from 'react';
+
+import { useLocaliteStore } from 'store/useLocaliteStore';
 
 const VillagePoints = () => {
-    const { localite } = useContext(AppContext);
+    const { localite } = useLocaliteStore();
 
     return (
         <ElementContainer

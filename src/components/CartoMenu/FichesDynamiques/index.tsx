@@ -1,51 +1,39 @@
 import { Accordion, AccordionDetails, AccordionGroup, AccordionSummary, LinearProgress, Radio, Stack } from "@mui/joy";
 import { useContext, useEffect, useState } from "react";
-import { LOADING_STATE_T } from "types";
-import { AppContext } from "providers";
-import getAllFeuille from "functions/API/feuille/getAllFeuille";
+
+import { useGetAllFeuille } from "hooks/useApi";
 import ImagePicker from "components/ImagePicker/ImagePicker";
 import { CardMedia } from "@mui/material";
 import classeurToHideInFicheDynamique from "./classeurToHideInFicheDynamique";
+import { useFicheStore } from 'store/useFicheStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useUIStore } from 'store/useUIStore';
 
 const FichesDynamiques = () => {
-    const {
-        ficheTitleSelected,
-        setficheTitleSelected,
-        getAllFicheData,
-        setgetAllFicheData,
-        ficheDynamiquesData,
-        setficheDynamiquesData,
-        setlegendeSection,
-        iconList
-    } = useContext(AppContext);
+    const { ficheTitleSelected, setficheTitleSelected, getAllFicheData, setgetAllFicheData, ficheDynamiquesData, setficheDynamiquesData } = useFicheStore();
+    const { setlegendeSection } = useLegendStore();
+    const { iconList } = useUIStore();
 
     const [ficheTitle, setficheTitle] = useState([] as string[]);
-    const [loadingState, setloadingState] = useState(null as LOADING_STATE_T);
+    const { data: res, isLoading } = useGetAllFeuille();
 
-    const loadData = async () => {
-        try {
-            setloadingState("En cours de chargement");
-            const res = await getAllFeuille();
+    useEffect(() => {
+        if (!res) return;
 
-            if (!res) return;
+        const titles = Object.keys(res);
+        const titleFiltered = titles.filter(title => !classeurToHideInFicheDynamique.includes(title));
 
-            const titles = Object.keys(res);
+        setficheTitle(titleFiltered);
 
-            const titleFiltered = titles.filter(title => !classeurToHideInFicheDynamique.includes(title));
-
-            setficheTitle(titleFiltered);
-
-            // Initialiser les icônes par défaut
+        if (ficheDynamiquesData.length === 0) {
             setficheDynamiquesData(titleFiltered.map(title => ({
                 title,
                 icon: iconList[0]
             })));
-
-            setgetAllFicheData(res);
-        } finally {
-            setloadingState(null);
         }
-    }
+
+        setgetAllFicheData(res);
+    }, [res, iconList, setficheDynamiquesData, setgetAllFicheData]);
 
     const toogleElementInFicheTitleSelected = (element: string) => {
         const isInList = ficheTitleSelected.includes(element);
@@ -64,10 +52,6 @@ const FichesDynamiques = () => {
                 : [...prev, { feuille, icon }]
         );
     };
-
-    useEffect(() => {
-        loadData();
-    }, []);
 
     useEffect(() => {
         if (ficheTitleSelected.length > 0) {
@@ -101,7 +85,7 @@ const FichesDynamiques = () => {
 
     return (
         <Stack gap={1} pr={0.5} >
-            {loadingState && (<LinearProgress color="success" />)}
+            {isLoading && (<LinearProgress color="success" />)}
 
             <AccordionGroup sx={{ gap: 1 }} >
                 {ficheTitle.map((title, index) => (

@@ -1,14 +1,10 @@
 import { Button, ButtonGroup, FormControl, FormLabel, Grid, Input, Modal, ModalClose, ModalDialog, Stack, Typography } from '@mui/joy'
-import { AppContext } from 'providers'
+
 import { useContext, useEffect, useState } from 'react'
+import { useUIStore } from 'store/useUIStore';
 
 const ShapeFileColorEditer = () => {
-    const {
-        setshowShapeFileColorEditer,
-        showShapeFileColorEditer,
-        ShapeFileColorEditerSubmitFunction,
-        ShapeFileColorEditerDefaultValues
-    } = useContext(AppContext);
+    const { setshowShapeFileColorEditer, showShapeFileColorEditer, ShapeFileColorEditerSubmitFunction, ShapeFileColorEditerDefaultValues } = useUIStore();
 
     const [formData, setformData] = useState<{
         borderColor?: string,

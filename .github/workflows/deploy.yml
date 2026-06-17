@@ -1,4 +1,4 @@
-name: Deploy build/ via FTP
+name: Build & Deploy via FTP
 
 on:
   push:
@@ -6,12 +6,31 @@ on:
       - push-server
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build with Vite
+        run: npm run build
+        env:
+          VITE_SHAPE_FILE_URL_DEV: ${{ secrets.VITE_SHAPE_FILE_URL_DEV }}
+          VITE_SHAPE_FILE_URL_PROD: ${{ secrets.VITE_SHAPE_FILE_URL_PROD }}
+          VITE_API_URL_DEV: ${{ secrets.VITE_API_URL_DEV }}
+          VITE_API_URL_PROD: ${{ secrets.VITE_API_URL_PROD }}
+          VITE_ROOT_URL_DEV: ${{ secrets.VITE_ROOT_URL_DEV }}
+          VITE_ROOT_URL_PROD: ${{ secrets.VITE_ROOT_URL_PROD }}
 
       - name: Upload build folder via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4

@@ -1,22 +1,23 @@
 import { Button, ButtonGroup, Checkbox, LinearProgress, Sheet, Stack } from "@mui/joy";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { COUCHE_DE_DONNEES_LISTE, ICON } from "constant";
-import { GET_ALL_REQUETE_CARTE_T, LOADING_STATE_T } from "types";
-import getAllRequeteCarte from "functions/API/requeteCartographique/getAllRequeteCarte";
-import { AppContext } from "providers";
+import { useGetAllRequeteCarte } from "hooks/useApi";
+
 import ImagePicker from "components/ImagePicker/ImagePicker";
 
+import { GET_ALL_REQUETE_CARTE_T } from "types";
+import { useFicheStore } from 'store/useFicheStore';
+import { useLegendStore } from 'store/useLegendStore';
+import { useUIStore } from 'store/useUIStore';
+
 const FicheDeDonnee = () => {
-    const {
-        allRequeteCartoSelected,
-        setallRequeteCartoSelected,
-        setlegendeSection,
-        iconList,
-    } = useContext(AppContext);
+    const { allRequeteCartoSelected, setallRequeteCartoSelected } = useFicheStore();
+    const { setlegendeSection } = useLegendStore();
+    const { iconList } = useUIStore();
 
     const [isAllCocher, setisAllCocher] = useState(false);
     const [data, setdata] = useState([] as { icon?: any, data: GET_ALL_REQUETE_CARTE_T }[]);
-    const [loadingState, setloadingState] = useState(null as LOADING_STATE_T);
+    const { data: res, isLoading } = useGetAllRequeteCarte();
 
     const updateDataIcon = (index: number, icon: any) => {
         const newData = [...data];
@@ -24,20 +25,13 @@ const FicheDeDonnee = () => {
         setdata(newData);
     }
 
-    const loadData = async () => {
-        try {
-            setloadingState("En cours de chargement");
-            const res = await getAllRequeteCarte();
-            if (!res) return;
-
-            setdata(res.map(value => ({
-                data: value,
-                icon: iconList[0]
-            })));
-        } finally {
-            setloadingState(null);
-        }
-    }
+    useEffect(() => {
+        if (!res) return;
+        setdata(res.map(value => ({
+            data: value,
+            icon: iconList[0]
+        })));
+    }, [res, iconList]);
 
     const toogleElementInSelectedListe = (element: { icon?: any, data: GET_ALL_REQUETE_CARTE_T }) => {
         let isInListe = allRequeteCartoSelected.find(({ data }) => data.Nom_View === element.data.Nom_View);
@@ -49,7 +43,7 @@ const FicheDeDonnee = () => {
         }
         else {
             setallRequeteCartoSelected(
-                (prev: typeof COUCHE_DE_DONNEES_LISTE) => [...prev, element]
+                (prev) => [...prev, element]
             );
         }
     }
@@ -59,12 +53,7 @@ const FicheDeDonnee = () => {
         setisAllCocher(!isAllCocher);
     }
 
-    useEffect(
-        () => {
-            loadData();
-        },
-        []
-    );
+
 
     useEffect(
         () => {
@@ -131,7 +120,7 @@ const FicheDeDonnee = () => {
                 }}
                 variant="soft"
             >
-                {loadingState && (<LinearProgress color="success" />)}
+                {isLoading && (<LinearProgress color="success" />)}
 
                 {
                     data.map((value, index) => (

@@ -1,11 +1,13 @@
 import { blue } from '@mui/material/colors';
 import ShapeFileContainer from 'components/Cartographie/ShapeFileContainer';
 import { REACT_APP_SHAPE_FILE_URL } from 'constant';
-import { AppContext } from 'providers';
-import { useContext } from 'react';
+
+import { useLocaliteStore } from 'store/useLocaliteStore';
+import { useDataLayerStore } from 'store/useDataLayerStore';
 
 const RegionShapFiles = () => {
-    const { localite, coucheDeDonneesElementConfig } = useContext(AppContext);
+    const { localite } = useLocaliteStore();
+    const { coucheDeDonneesElementConfig } = useDataLayerStore();
 
     return (
         <ShapeFileContainer
