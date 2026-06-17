@@ -7,16 +7,9 @@ import { Fragment, useCallback, useEffect, useState, useRef } from "react";
 import { Marker, Popup } from "react-leaflet";
 import { toast } from "react-toastify";
 
-// Définition des types pour les données traitées par le worker
-interface PopUpDataItem {
-    label: string;
-    value: any;
-}
-
-export interface ProcessedPoint {
-    coor: [number, number];
-    popUpData: PopUpDataItem[];
-}
+import { useWorker } from "hooks/useWorker";
+import ElementWorker from "../../workers/ElementContainerWorker?worker";
+import { PopUpDataItem, ProcessedPoint, WorkerInputData } from "../../workers/ElementContainerWorker";
 
 const ElementContainer = ({
     data,
@@ -37,55 +30,36 @@ const ElementContainer = ({
     }
 }) => {
     const [processedPoints, setProcessedPoints] = useState<ProcessedPoint[]>([]);
-    const workerRef = useRef<Worker | null>(null);
+    const handleWorkerMessage = useCallback((newPointsChunk: ProcessedPoint[]) => {
+        console.log('La liste des points recu par le worker:', newPointsChunk);
+        setProcessedPoints(prevPoints => [...prevPoints, ...newPointsChunk]);
+    }, []);
 
-    const cleanWorker = () => {
-        if (workerRef.current) {
-            workerRef.current.terminate();
-            workerRef.current = null;
-        }
-    }
+    const handleWorkerError = useCallback((error: ErrorEvent) => {
+        console.error("Worker error:", error);
+        toast.error("Erreur lors du traitement des données par le worker.");
+    }, []);
 
-    const loadPoint = async () => {
-        try {
-            // toast.info(`Compilation des ${nomListe}`);
-
-            cleanWorker()
-
-            const worker = new Worker(new URL('../../workers/ElementContainerWorker.ts', import.meta.url));
-            workerRef.current = worker;
-
-            worker.postMessage({ data, fieldKeyListe });
-
-            worker.onmessage = (event) => {
-                const newPointsChunk: ProcessedPoint[] = event.data;
-                console.log('La liste des points recu par le worker:', newPointsChunk);
-                setProcessedPoints(prevPoints => [...prevPoints, ...newPointsChunk]);
-            };
-
-            worker.onerror = (error) => {
-                console.error("Worker error:", error);
-                toast.error("Erreur lors du traitement des données par le worker.");
-            };
-        } catch (error) {
-            toast.error('Une erreur est survenue lors de la compilation');
-        }
-    }
+    const { postMessage, terminate } = useWorker<WorkerInputData, ProcessedPoint[]>(
+        ElementWorker,
+        handleWorkerMessage,
+        handleWorkerError
+    );
 
     useEffect(() => {
         if (show) {
             setProcessedPoints([]);
-            loadPoint();
+            // toast.info(`Compilation des ${nomListe}`);
+            postMessage({ data, fieldKeyListe });
 
             return () => {
-                cleanWorker()
+                terminate();
             };
         } else {
-            // Si show est false, vider les points et terminer le worker
             setProcessedPoints([]);
-            cleanWorker();
+            terminate();
         }
-    }, [data, show, icon]);
+    }, [data, show, icon, postMessage, terminate, fieldKeyListe, nomListe]);
 
     const renderPopupContent = useCallback((popUpData: PopUpDataItem[]) => (
         <Popup>
@@ -119,7 +93,7 @@ const ElementContainer = ({
                                 minWidth={"25%"}
                                 fontSize={11}
                             >
-                                {item.value}
+                                {String(item.value ?? '')}
                             </Typography>
                         </Stack>
                         <Divider />
@@ -153,7 +127,7 @@ const ElementContainer = ({
                     icon={
                         markerText
                             ? getCustomeTextIcon({
-                                text: value.popUpData.find(item => item.label === markerText.field)?.value,
+                                text: String(value.popUpData.find(item => item.label === markerText.field)?.value ?? ''),
                                 bgcolor: markerText.color || green[600],
                                 padding: '5px 10px'
                             })
