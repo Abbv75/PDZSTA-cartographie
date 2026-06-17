@@ -8,6 +8,4 @@ export { SIDE_PANEL_LIST } from "./sidePanelList"
 export { CARTO_MENU_EN_TETE_ZONE } from "./cartoMenuEntete";
 export { default as ICON } from './icon';
 
-export const REACT_APP_SHAPE_FILE_URL = import.meta.env.MODE === "production"
-    ? import.meta.env.VITE_SHAPE_FILE_URL_PROD
-    : import.meta.env.VITE_SHAPE_FILE_URL_DEV;
+export const REACT_APP_SHAPE_FILE_URL = import.meta.env.VITE_SHAPE_FILE_URL;

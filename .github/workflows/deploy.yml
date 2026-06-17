@@ -25,12 +25,9 @@ jobs:
       - name: Build with Vite
         run: npm run build
         env:
-          VITE_SHAPE_FILE_URL_DEV: ${{ secrets.VITE_SHAPE_FILE_URL_DEV }}
-          VITE_SHAPE_FILE_URL_PROD: ${{ secrets.VITE_SHAPE_FILE_URL_PROD }}
-          VITE_API_URL_DEV: ${{ secrets.VITE_API_URL_DEV }}
-          VITE_API_URL_PROD: ${{ secrets.VITE_API_URL_PROD }}
-          VITE_ROOT_URL_DEV: ${{ secrets.VITE_ROOT_URL_DEV }}
-          VITE_ROOT_URL_PROD: ${{ secrets.VITE_ROOT_URL_PROD }}
+          VITE_SHAPE_FILE_URL: ${{ secrets.VITE_SHAPE_FILE_URL }}
+          VITE_API_URL: ${{ secrets.VITE_API_URL }}
+          VITE_ROOT_URL: ${{ secrets.VITE_ROOT_URL }}
 
       - name: Upload build folder via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4

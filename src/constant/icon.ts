@@ -1,6 +1,4 @@
-const path = (import.meta.env.MODE === "production")
-    ? import.meta.env.VITE_ROOT_URL_PROD
-    : import.meta.env.VITE_ROOT_URL_DEV;
+const path = import.meta.env.VITE_ROOT_URL;
 
 
 export default {
